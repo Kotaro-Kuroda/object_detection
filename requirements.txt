@@ -1,0 +1,16 @@
+timm
+tqdm
+matplotlib
+scikit-learn
+jpeg4py
+pyqt5
+cython
+kornia
+pulp
+opencv-python-headless==4.5.3.56
+addict
+plotly
+inpoly
+cassandra-driver
+box_utils @ https://ai-ed800-2.nichia.local/pylib/box_utils-0.3.1-py3-none-any.whl
+pyodbc
