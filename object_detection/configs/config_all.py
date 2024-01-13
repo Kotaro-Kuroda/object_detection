@@ -19,7 +19,7 @@ args = dict(
     out_channels=64,  # 特徴マップのチャンネル数
     baseline='bifpn',
     num_layers=7,
-    classes=['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor'],
+    classes=['aeroplane', 'bicycle', 'bird'],  # 'boat', 'bottle', 'bus', 'car', 'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor'],
     colors=((0, 0, 0), (0, 255, 0)),
     is_torch=True,
 )

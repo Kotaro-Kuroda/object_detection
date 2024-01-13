@@ -89,12 +89,12 @@ class MyDataset(torch.utils.data.Dataset):
         annotations = []
         for image in tqdm.tqdm(self.image_list):
             xml_path = f'{os.path.splitext(image)[0]}.xml'
-            h, w = self._get_size(image)
             # transform_anno = Json2List(self.classes, h, w, self.height, self.width)
             transform_anno = xml2list(self.classes)
-            annotation, _ = transform_anno(xml_path)
-            images.append(image)
-            annotations.append(annotation)
+            annotation, num_obj = transform_anno(xml_path)
+            if num_obj > 0:
+                images.append(self._preproc(image))
+                annotations.append(annotation)
 
         return images, annotations
 
@@ -113,7 +113,6 @@ class MyDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, index):
         image = self.valid_image_list[index]
-        image = self._preproc(image)
         annotations = self.list_annotaion[index]
         boxes = torch.as_tensor(annotations['bboxes'], dtype=torch.int64)
         labels = torch.as_tensor(annotations['labels'], dtype=torch.int64)

@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-torch = {file = "https://download.pytorch.org/whl/cu121/torch-2.1.0%2Bcu121-cp311-cp311-linux_x86_64.whl"}
-torchvision = {file = "https://download.pytorch.org/whl/cu121/torchvision-0.16.0%2Bcu121-cp311-cp311-linux_x86_64.whl"}
+torch = {file = "https://download.pytorch.org/whl/cu121/torch-2.1.2%2Bcu121-cp311-cp311-linux_x86_64.whl"}
+torchvision = {file = "https://download.pytorch.org/whl/cu121/torchvision-0.16.2%2Bcu121-cp311-cp311-linux_x86_64.whl"}
 opencv-python-headless = "*"
 jpeg4py = "*"
 matplotlib = "*"

@@ -1,14 +1,12 @@
 import copy
-from typing import OrderedDict
+from functools import partial, reduce
+from typing import OrderedDict, Sequence
+
 import torch
 import torch.nn as nn
-
 from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 from timm.layers import DropPath, trunc_normal_
-from timm.models.registry import register_model
 from timm.layers.helpers import to_2tuple
-from functools import partial, reduce
-from typing import Sequence
 
 
 def _cfg(url='', **kwargs):
@@ -514,7 +512,6 @@ model_urls = {
 }
 
 
-@register_model
 def poolformer_s12(pretrained=False, **kwargs):
     """
     PoolFormer-S12 model, Params: 12M
@@ -541,7 +538,6 @@ def poolformer_s12(pretrained=False, **kwargs):
     return model
 
 
-@register_model
 def poolformer_s24(pretrained=False, **kwargs):
     """
     PoolFormer-S24 model, Params: 21M
@@ -565,7 +561,6 @@ def poolformer_s24(pretrained=False, **kwargs):
     return model
 
 
-@register_model
 def pppa_s24(pretrained=False, **kwargs):
     """
     PoolFormer-S24 model, Params: 21M
@@ -591,7 +586,6 @@ def pppa_s24(pretrained=False, **kwargs):
     return model
 
 
-@register_model
 def poolformer_s36(pretrained=False, **kwargs):
     """
     PoolFormer-S36 model, Params: 31M
@@ -615,7 +609,6 @@ def poolformer_s36(pretrained=False, **kwargs):
     return model
 
 
-@register_model
 def poolformer_m36(pretrained=False, **kwargs):
     """
     PoolFormer-M36 model, Params: 56M
@@ -637,7 +630,6 @@ def poolformer_m36(pretrained=False, **kwargs):
     return model
 
 
-@register_model
 def poolformer_m48(pretrained=False, **kwargs):
     """
     PoolFormer-M48 model, Params: 73M
