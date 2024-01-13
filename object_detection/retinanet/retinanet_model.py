@@ -14,7 +14,7 @@ def fcos(num_classes, pretrained_backbone=False):
     return fcos_resnet50_fpn(num_classes=num_classes, pretrained_backbone=pretrained_backbone)
 
 
-def get_model(num_classes, pretrained=False, layers=[0, 2, 4, 6], arch='retinanet', backbone='poolformer_s24', is_torch=False, out_channels=256, baseline='fpn', num_layers=2, **kwargs):
+def get_model(num_classes, min_size=512, max_size=512, pretrained=False, layers=[0, 2, 4, 6], arch='retinanet', backbone='poolformer_s24', is_torch=False, out_channels=256, baseline='fpn', num_layers=2, **kwargs):
     if arch == 'retinanet':
         if backbone == 'resnet50':
             anchor_sizes = tuple((x, int(x * 2 ** (1.0 / 3)), int(x * 2 ** (2.0 / 3)))
@@ -41,7 +41,7 @@ def get_model(num_classes, pretrained=False, layers=[0, 2, 4, 6], arch='retinane
                 norm_layer=partial(nn.GroupNorm, 32),
             )
             head.regression_head._loss_type = "giou"
-            model = RetinaNet(backbone, num_classes=num_classes, anchor_generator=anchor_generator, head=head, **kwargs)
+            model = RetinaNet(backbone, num_classes=num_classes, anchor_generator=anchor_generator, head=head, min_size=min_size, max_size=max_size, **kwargs)
         elif 'poolformer' in backbone:
             anchor_size = [2 ** (4 + i) for i in range(len(layers) + 2)]
             backbone = poolformer_backbone(backbone=backbone, pretrained=pretrained, layers=layers, out_channels=out_channels, baseline=baseline, num_layers=num_layers)

@@ -3,49 +3,25 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[[source]]
-url = "https://download.pytorch.org/whl/cu116"
-verify_ssl = true
-name = "downloadpytorch"
-
-[[source]]
-url = "https://developer.download.nvidia.com/compute/redist"
-verify_ssl = true
-name = "developerdownloadnvidia"
-
-[[source]]
-url = "https://developer.download.nvidia.com/compute/redist"
-verify_ssl = true
-name = "developerdownloadnvidia"
-
 [packages]
-torch = {version= "==1.13.1+cu117", file="https://download.pytorch.org/whl/cu117/torch-1.13.1%2Bcu117-cp38-cp38-linux_x86_64.whl"}
-torchvision = {version= "==0.14.1+cu117", file="https://download.pytorch.org/whl/cu117/torchvision-0.14.1%2Bcu117-cp38-cp38-linux_x86_64.whl"}
-torchaudio = {version= "==0.13.1+cu117", file="https://download.pytorch.org/whl/cu117/torchaudio-0.13.1%2Bcu117-cp38-cp38-linux_x86_64.whl"}
-timm = "*"
-tqdm = "*"
-matplotlib = "*"
-scikit-learn = "*"
+torch = {file = "https://download.pytorch.org/whl/cu121/torch-2.1.0%2Bcu121-cp311-cp311-linux_x86_64.whl"}
+torchvision = {file = "https://download.pytorch.org/whl/cu121/torchvision-0.16.0%2Bcu121-cp311-cp311-linux_x86_64.whl"}
+opencv-python-headless = "*"
 jpeg4py = "*"
-pyqt5 = "*"
-cython = "*"
+matplotlib = "*"
 kornia = "*"
-pulp = "*"
-opencv-python-headless = "==4.5.3.56"
+tqdm = "*"
+scikit-learn = "*"
+joblib = "*"
+timm = "*"
 addict = "*"
-plotly = "*"
-inpoly = "*"
-cassandra-driver = "*"
-box-utils = {file = "https://ai-ed800-2.nichia.local/pylib/box_utils-0.3.1-py3-none-any.whl"}
-pyodbc = "*"
-optuna = "*"
+tensorboard = "*"
+pytorch-memlab = "*"
+torchmetrics = "*"
+faster-coco-eval = "*"
 
 [dev-packages]
-flake8 = "*"
-autopep8 = "*"
-torch-tb-profiler = "*"
-torchinfo = "*"
 ipdb = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.11"
