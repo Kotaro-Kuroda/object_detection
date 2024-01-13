@@ -4,12 +4,13 @@
 ### 現在使用可能なモデル
 - RetinaNet
 - FCOS
+- EfficientDet
 
 ### 現在使用可能なバックボーン
 - ResNet50
 - EfficientNet b0 ~ b7
 - PoolFormer S24, S36
-
+- EfficientNetV2 S, M, L
 ### 現在使用可能なピラミッドネットワーク
 - FPN
 - BiFPN
@@ -26,36 +27,29 @@
 ```bash
 sudo yum install turbojpeg
 ```
-## インストール方法
+## 環境構築
+Python 3.11をインストール。
 
+pipenv をインストール
 ```bash
-pip install https://ai-ed800-2.nichia.local/pylib/object_detection-0.1.4-py3-none-any.whl
+pip install pipenv
+```
+
+ライブラリのインストール
+```bash
+pipenv sync
 ```
 
 ## 使用方法
 
-### 学習データ生成
 
-下記コマンドで、接触、θズレ、重なりなどの異常を人工的に生成した教師データ画像とそのアノテーションファイル(xml)が生成されます。
 
-```bash
-create-training-image --basepath /path/to/image --background_path /path/to/background/image/path --ext .jpg --temp_save_dir /path/to/temp/save/dir --batch_size 4 --mtype 4HB-HE70NC --save_dir /path/to/save/dir
-```
-コマンドライン引数
-
---basepath 画像フォルダへのパス\
---background_path 背景画像フォルダへのパス\
---ext 画像の拡張子\
---temp_save_dir 人工NGを含む前のオリジナル画像にたいするアノテーションファイルを保存する場所\
---batch_size バッチサイズ（整数を指定）\
---mtype 型番\
---save_dir 人工NG画像とそのアノテーションファイルを保存する場所
 
 ### 推論
 下記のコマンドで推論を行うことができます。
 
 ```bash
-pred_rotate --image_dir /path/to/image/directory
+python -m object_detection.predict --image_dir /path/to/image/directory
 ```
 コマンドライン引数
 
@@ -64,21 +58,10 @@ pred_rotate --image_dir /path/to/image/directory
 --batch_size バッチサイズ \
 --model_path 学習済みモデルへのパス\
 --arg_file 学習に用いたパラメータなどの設定ファイルへのパス\
---chip_img_save_dir 切り出し画像を保存するディレクトリへのパス\
---mtype 型番\
---margin_x 切り出し画像の左右のマージンサイズ\
---margin_y 切り出し画像の上下のマージンサイズ\
 --device 使用するデバイス (cuda or cpu)\
 --save_dir 推論結果の画像を保存するディレクトリへのパス\
---cut 切り出し画像を保存するかどうか (保存する場合は --cut　オプションを付ける。しない場合は付けない)\
 --img_save 推論結果の画像を保存するかどうか(保存する場合は --img_save　オプションを付ける。しない場合は付けない)
 
-### モデル生成
-```python
-from object_detection.retinanet.retinanet_model import get_model
-
-model = get_model(num_classes=10, pretrained=True, layers=[0, 2, 4, 6], arch='retinanet', backbone='poolformer_s24', out_channels=64, baseline='bifpn', num_layers=2, **kwargs)
-```
 
 ### 学習
 下記のコマンドで物体検出AIの学習を行うことができます。 configファイルの中でAIのハイパーパラメータなどの指定を行います。
@@ -92,28 +75,6 @@ train --train_dir /path/to/dataset --config /path/to/config/file
 --train_dir トレーニング用のデータセットのディレクトリへのパス\
 --config トレーニングのパラメータなどの設定ファイルへのパス
 
-### データセットのディレクトリ構成
-
-```
-.
-├── 4HB-HE70NC
-│   └── 0001_0_0
-|           ├── *.jpg
-|           └── *.xml           
-├── 4RB-HE70VS
-│   └── 0001_0_0
-|           ├── *.jpg
-|           └── *.xml       
-├── 4RB-RV58VD
-│   └── 0001_0_0
-|           ├── *.jpg
-|           └── *.xml       
-└── D0RM-24A01-05
-    └── 0001_0_0
-            ├── *.jpg
-            └── *.xml     
-
-```
 
 ### 設定ファイルの書き方
 ```python
