@@ -1,5 +1,4 @@
 import argparse
-import glob
 import os
 import pickle
 import sys
@@ -8,9 +7,7 @@ import time
 import numpy as np
 import torch
 import tqdm
-from kornia.geometry import transform as K
 from PIL import Image, ImageDraw, ImageFont
-from torch import nn
 from torch.utils.data import DataLoader
 from torchvision.ops import nms
 

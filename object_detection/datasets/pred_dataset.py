@@ -1,10 +1,9 @@
-from torch.utils.data import Dataset
-import jpeg4py
-from torchvision import transforms
 import glob
 import os
-from PIL import Image
-import numpy as np
+
+import jpeg4py
+from torch.utils.data import Dataset
+from torchvision import transforms
 
 
 class PredDataset(Dataset):
