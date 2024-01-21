@@ -19,6 +19,7 @@ tensorboard = "*"
 pytorch-memlab = "*"
 torchmetrics = "*"
 faster-coco-eval = "*"
+pulp = "*"
 
 [dev-packages]
 ipdb = "*"

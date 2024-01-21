@@ -1,7 +1,7 @@
 import numpy as np
 import pulp
-from box_utils.box_utils import box_giou
 from torch import Tensor
+from torchvision.ops.giou_loss import generalized_box_iou_loss
 
 
 def oc_cost(true_boxes, pred_boxes, true_labels, pred_labels, scores, lam=0.5, beta=0.6):
@@ -15,7 +15,7 @@ def oc_cost(true_boxes, pred_boxes, true_labels, pred_labels, scores, lam=0.5, b
 
 
 def calc_cloc(true_boxes, pred_boxes):
-    giou = box_giou(pred_boxes, true_boxes)
+    giou = generalized_box_iou_loss(pred_boxes, true_boxes)
     if isinstance(giou, Tensor):
         giou = giou.cpu().numpy()
     return (1 - giou) / 2
